@@ -24,13 +24,21 @@ namespace Arena_Fight
         //Luck is the only one never shown to the player
         int luck = 0;
 
+        string name;
         string choice;
 
         public Player()
         {
+            SetName();
             RollStats();
         }
 
+        private void SetName()
+        {
+            Console.Clear();
+            Console.WriteLine("Please write your characters name: ");
+            name = Console.ReadLine();
+        }
 
         //Sets the random value once and loops until the player is happ with their stats
         private void RollStats()
@@ -47,7 +55,8 @@ namespace Arena_Fight
                 charisma = rnd.Next(3, 21);
                 luck = rnd.Next(3, 21);
 
-                Console.WriteLine("Your stats are: " +
+                Console.WriteLine("This is you: " +
+                  "\n Your name: " + name +
                   "\n Strenght: " + strenght +
                   "\n Dexterity: " + dexterity +
                   "\n Constitution: " + constitution +
@@ -100,6 +109,11 @@ namespace Arena_Fight
                 default:
                     return 0;
             }
+        }
+
+        public string GetName()
+        {
+            return name;
         }
     }
 }

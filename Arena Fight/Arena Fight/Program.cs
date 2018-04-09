@@ -34,7 +34,6 @@ namespace Arena_Fight
                     "\n 3: End the game");
                 menuChoice = Console.ReadLine();
 
-
                 switch (menuChoice)
                 {
                     case "1":
@@ -64,7 +63,6 @@ namespace Arena_Fight
         private static Player CreateCharacter()
         {
             Player player = new Player();
-
             return player;
         }
 
@@ -85,6 +83,7 @@ namespace Arena_Fight
                 {
                     case "1":
                         Console.Clear();
+                        Console.WriteLine(player.GetName());
                         foreach (var stat in stats)
                         {
                             Console.WriteLine(stat + ": " + player.GetStats(stat));
