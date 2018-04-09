@@ -31,34 +31,37 @@ namespace Arena_Fight
         {
             Random rnd = new Random();
 
-            strenght = rnd.Next(3, 21);
-            dexterity = rnd.Next(3, 21);
-            constitution = rnd.Next(3, 21);
-            intelligence = rnd.Next(3, 20);
-            wisdom = rnd.Next(3, 21);
-            charisma = rnd.Next(3, 21);
-            luck = rnd.Next(3, 21);
-
-            Console.WriteLine("Your stats are: " +
-              "\n Strenght: " + strenght +
-              "\n Dexterity: " + dexterity +
-              "\n Constitution: " + constitution +
-              "\n Intelligence: " + intelligence +
-              "\n Wisdom: " + wisdom +
-              "\n Charisma: " + charisma +
-              "\n Are you happy with theese stats? y/n"
-              );
-            choice = Console.ReadLine();
-
-            if (choice == "n" || choice == "N")
+            while (true)
             {
-                Console.Clear();
-                RollStats();
-            }
-            else
-            {
-                SetStats();
-                Console.ReadKey();
+                strenght = rnd.Next(3, 21);
+                dexterity = rnd.Next(3, 21);
+                constitution = rnd.Next(3, 21);
+                intelligence = rnd.Next(3, 20);
+                wisdom = rnd.Next(3, 21);
+                charisma = rnd.Next(3, 21);
+                luck = rnd.Next(3, 21);
+
+                Console.WriteLine("Your stats are: " +
+                  "\n Strenght: " + strenght +
+                  "\n Dexterity: " + dexterity +
+                  "\n Constitution: " + constitution +
+                  "\n Intelligence: " + intelligence +
+                  "\n Wisdom: " + wisdom +
+                  "\n Charisma: " + charisma +
+                  "\n Are you happy with theese stats? y/n"
+                  );
+                choice = Console.ReadLine();
+
+                if (choice == "n" || choice == "N")
+                {
+                    Console.Clear();
+                    //RollStats();
+                }
+                else
+                {
+                    SetStats();
+                    return;
+                } 
             }
         }
 
@@ -69,23 +72,23 @@ namespace Arena_Fight
             currentHp = maxHp;
         }
 
-        public int getStats(string statCheck)
+        public int GetStats(string statCheck)
         {
             switch (statCheck)
             {
-                case "strenght":
+                case "Strenght":
                     return strenght;
-                case "dexterity":
+                case "Dexterity":
                     return dexterity;
-                case "constitution":
+                case "Constitution":
                     return constitution;
-                case "intelligence":
+                case "Intelligence":
                     return intelligence;
-                case "wisdom":
+                case "Wisdom":
                     return wisdom;
                 case "Charisma":
                     return charisma;
-                case "luck":
+                case "Luck":
                     return luck;
                 default:
                     return 0;
