@@ -10,6 +10,7 @@ namespace Arena_Fight
     {
         static void Main(string[] args)
         {
+            //Not really needed right now. But I'm keeping it if i need to change anything. Because right now it only pulls like 0.000000000000000000000001 millisec extra.
             bool gameRunning = true;
             Player player = null;
 
@@ -21,7 +22,7 @@ namespace Arena_Fight
 
         private static bool StartMenu(Player player)
         {
-            //bool playGame = true;
+            //Start menu 
             while (true)
             {
                 string menuChoice = "0";
@@ -48,18 +49,18 @@ namespace Arena_Fight
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine("You have not created a player yet!");
+                            Console.WriteLine("You have not created a character yet!");
                             Console.ReadKey();
                         }
                         break;
+                    //Returns false to for the entire loop and quits out
                     case "3":
                         return false;
-                        //playGame = false;
-                        //break;
                 }
             }
         }
 
+        //Strictly needed? No. But looks neater.
         private static Player CreateCharacter()
         {
             Player player = new Player();
@@ -70,6 +71,7 @@ namespace Arena_Fight
         private static void RunGame(Player player)
         {
             string menuChoice = "0";
+            //Used to keep check of the stats and to tell GetStats what stats to get.
             string[] stats = new string[]{"Strenght", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
 
             while (true)
@@ -90,9 +92,8 @@ namespace Arena_Fight
                         Console.ReadKey();
                         break;
                     case "2":
-                        //StartMenu(player);
+                        //StartMenu(player); //This was stupid of me. Keeping it as a reminder. Don't call the same function in the very same function! Use a loop!
                         return;
-                        //break;
                 } 
             }
         }

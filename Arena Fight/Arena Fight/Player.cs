@@ -8,6 +8,8 @@ namespace Arena_Fight
 {
     public class Player
     {
+
+        //Just base stats. Aren't sure if all are going to get used but hey.
         int level = 1;
         int maxHp = 1;
         int currentHp = 1;
@@ -18,6 +20,8 @@ namespace Arena_Fight
         int intelligence = 0;
         int wisdom = 0;
         int charisma = 0;
+
+        //Luck is the only one never shown to the player
         int luck = 0;
 
         string choice;
@@ -27,6 +31,8 @@ namespace Arena_Fight
             RollStats();
         }
 
+
+        //Sets the random value once and loops until the player is happ with their stats
         private void RollStats()
         {
             Random rnd = new Random();
@@ -72,6 +78,7 @@ namespace Arena_Fight
             currentHp = maxHp;
         }
 
+        //Checks an incoming string to see what value it should send back
         public int GetStats(string statCheck)
         {
             switch (statCheck)
