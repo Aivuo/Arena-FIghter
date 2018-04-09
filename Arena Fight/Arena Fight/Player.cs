@@ -50,7 +50,7 @@ namespace Arena_Fight
                 strenght = rnd.Next(3, 21);
                 dexterity = rnd.Next(3, 21);
                 constitution = rnd.Next(3, 21);
-                intelligence = rnd.Next(3, 20);
+                intelligence = rnd.Next(3, 21);
                 wisdom = rnd.Next(3, 21);
                 charisma = rnd.Next(3, 21);
                 luck = rnd.Next(3, 21);
