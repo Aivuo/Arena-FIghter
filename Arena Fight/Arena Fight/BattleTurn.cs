@@ -13,11 +13,11 @@ namespace Arena_Fight
         int enemyRoll = 0;
         int playerRoll = 0;
 
-        string[] hittingMonster = {"" };
-        string[] missingMonster = { "" };
+        string[] hittingMonster = {" hits the opponent square on!", " hits with a strong left hook!", " strikes with a downward blow!"};
+        string[] missingMonster = {" misses the opponent by a mile!", " misses by just a couple of millimeters!", " swings over the opponents head!"};
 
-        string[] monsterHitting = { "" };
-        string[] monsterMissing = { "" };
+        string[] monsterHitting = {" swings and hits!", " watches! And swings... It's a hit!", " good hit! That's gotta hurt!"};
+        string[] monsterMissing = {"What a miss ", "How did you miss ", "Look out for your own swings "};
 
         public BattleTurn(Player playerIn, Enemy enemyIn)
         {
@@ -25,10 +25,12 @@ namespace Arena_Fight
             enemy = enemyIn;
         }
 
-        internal void HitEachother(Random rnd)
+        internal string HitEachother(Random rnd)
         {
             playerRoll = rnd.Next(0, 21);
             enemyRoll = rnd.Next(0, 21);
+            string battleLog;
+            int damage = 0;
 
             //Somewhat convoluted but it gets the players highest atk stat and adds it to he players roll
             playerRoll += player.GetStats(player.GetHighestAtk());
@@ -36,9 +38,30 @@ namespace Arena_Fight
 
             if (playerRoll > enemy.GetStats("Dexterity"))
             {
-                enemy.SetHealth(playerRoll - enemy.GetStats("Dexterity"));
-                Console.WriteLine(hittingMonster[rnd.Next(0, 3)]);
+                damage = playerRoll - enemy.GetStats("Dexterity");
+                enemy.SetHealth(damage);
+                battleLog = player.GetName() + hittingMonster[rnd.Next(0, 3)]+ "\n" + damage + " Damage done! \n" + enemy.GetName() + " has " + enemy.GetStats("currentHp") + " health left";
             }
+            else
+            {
+                battleLog = player.GetName() + missingMonster[rnd.Next(0, 3)] + "\n" + enemy.GetName() + " has " + enemy.GetStats("currentHp") + " health left";
+            }
+
+            if (enemy.GetStats("currentHp") > 0)
+            {
+                if (enemyRoll > player.GetStats("Dexterity"))
+                {
+                    player.ChangeStats("currentHp", "-", enemyRoll - player.GetStats("Dexterity"));
+                    battleLog += "\n \n" + enemy.GetName() + monsterHitting[rnd.Next(0, 3)];
+                }
+                else
+                {
+                    battleLog += "\n \n " + enemy.GetName() + monsterMissing[rnd.Next(0, 3)];
+                }
+            }
+
+            Console.WriteLine(battleLog);
+            return battleLog;
         }
     }
 }

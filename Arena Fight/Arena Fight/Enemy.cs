@@ -23,9 +23,9 @@ namespace Arena_Fight
             name = nameList[rnd.Next(0, 8)];
         }
 
-        public virtual void Attack()
+        public virtual string GetName()
         {
-
+            return name;
         }
 
         public virtual void Defend()

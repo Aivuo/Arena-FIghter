@@ -20,6 +20,7 @@ namespace Arena_Fight
         int intelligence = 0;
         int wisdom = 0;
         int charisma = 0;
+        int silver = 0;
 
         //Luck is the only one never shown to the player
         int luck = 0;
@@ -207,6 +208,11 @@ namespace Arena_Fight
         public void SetBattleLog(List<string> battleLogIn)
         {
             battleLog = battleLogIn;
+        }
+
+        public void SetSilver(int income)
+        {
+            silver += income;
         }
     }
 }

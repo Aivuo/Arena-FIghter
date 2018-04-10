@@ -31,6 +31,11 @@ namespace Arena_Fight
 
                 if (player.GetStats("currentHp") <= 0 || enemy.GetStats("currentHp") <= 0)
                 {
+                    if (enemy.GetStats("currentHp") <= 0)
+                    {
+                        player.SetSilver(enemy.GetStats("Silver"));
+                    }
+
                     player.SetBattleLog(battleLog);
                 }
             }
