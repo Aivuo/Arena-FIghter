@@ -68,9 +68,11 @@ namespace Arena_Fight
 
         private static void RunGame(Player player)
         {
+            bool playerAlive = true;
+
             string menuChoice = "0";
             //Used to keep check of the stats and to tell GetStats what stats to get.
-            string[] stats = new string[]{"Strenght", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
+            string[] stats = new string[]{"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
             Enemy enemy = null;
             Fight fight = null;
 
@@ -102,8 +104,17 @@ namespace Arena_Fight
                         if (enemy != null)
                         {
                             fight = new Fight(player, enemy);
-                            fight.DoBattle();
-                            Console.ReadKey();
+                            playerAlive = fight.DoBattle();
+
+                            if (playerAlive)
+                            {
+                                enemy = null;
+                            }
+                            else
+                            {
+                                player = EndTheRun(player);
+                                return;
+                            }
                         }
                         else
                         {
@@ -113,9 +124,23 @@ namespace Arena_Fight
                         break;
                     case "4":
                         //StartMenu(player); //This was stupid of me. Keeping it as a reminder. Don't call the same function in the very same function! Use a loop!
+                        player = EndTheRun(player);
                         return;
                 } 
             }
+        }
+
+        private static Player EndTheRun(Player player)
+        {
+            Console.Clear();
+
+            foreach (var log in player.GetBattleLog())
+            {
+                Console.WriteLine(log);
+            }
+            Console.ReadKey();
+            player = null;
+            return player;
         }
 
         private static Enemy ChooseOpponent()

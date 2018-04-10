@@ -8,10 +8,12 @@ namespace Arena_Fight
 {
     class Fight
     {
+        int silver = 0;
+
         Player player;
         Enemy enemy;
         BattleTurn turn;
-        List<String> battleLog;
+        List<string> battleLog;
         Random rnd;
 
         public Fight(Player playerIn, Enemy enemyIn)
@@ -20,23 +22,34 @@ namespace Arena_Fight
             enemy = enemyIn;
         }
 
-        public void DoBattle()
+        public bool DoBattle()
         {
+            battleLog = new List<string>();
+
             while (true)
             {
                 rnd = new Random();
                 turn = new BattleTurn(player, enemy);
+                bool playerAlive = true;
 
-                turn.HitEachother(rnd);
+                battleLog.Add(turn.HitEachother(rnd));
 
                 if (player.GetStats("currentHp") <= 0 || enemy.GetStats("currentHp") <= 0)
                 {
+                    player.SetBattleLog(battleLog);
+
                     if (enemy.GetStats("currentHp") <= 0)
                     {
-                        player.SetSilver(enemy.GetStats("Silver"));
+                        silver = enemy.GetStats("Silver");
+                        player.SetSilver(silver);
+                        Console.WriteLine(player.GetName() + " gained " + silver + " silver");
+                        playerAlive = true;
                     }
+                    else
+                        playerAlive = false;
 
-                    player.SetBattleLog(battleLog);
+                    Console.ReadKey();
+                    return playerAlive;
                 }
             }
         }

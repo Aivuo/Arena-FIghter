@@ -35,6 +35,7 @@ namespace Arena_Fight
         {
             SetName();
             RollStats();
+            battleLog = new List<string>();
         }
 
         private void SetName()
@@ -205,9 +206,17 @@ namespace Arena_Fight
             return highest;
         }
 
+        public List<string> GetBattleLog()
+        {
+            return battleLog;
+        }
+
         public void SetBattleLog(List<string> battleLogIn)
         {
-            battleLog = battleLogIn;
+            foreach (var log in battleLogIn)
+            {
+                battleLog.Add(log);
+            }
         }
 
         public void SetSilver(int income)
