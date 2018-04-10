@@ -10,7 +10,7 @@ namespace Arena_Fight
     {
 
         //Just base stats. Aren't sure if all are going to get used but hey.
-        int level = 1;
+        int level = 5;
         int maxHp = 1;
         int currentHp = 1;
 
@@ -21,6 +21,7 @@ namespace Arena_Fight
         int wisdom = 0;
         int charisma = 0;
         int silver = 0;
+        int score = 0;
 
         //Luck is the only one never shown to the player
         int luck = 0;
@@ -36,6 +37,7 @@ namespace Arena_Fight
             SetName();
             RollStats();
             battleLog = new List<string>();
+            battleLog.Add("\nThis is the story of " + name + "\n \n");
         }
 
         private void SetName()
@@ -111,8 +113,11 @@ namespace Arena_Fight
                     return charisma;
                 case "Luck":
                     return luck;
+                case "Current Health":
                 case "currentHp":
                     return currentHp;
+                case "Silver":
+                    return silver;
                 default:
                     return 0;
             }
@@ -121,6 +126,16 @@ namespace Arena_Fight
         public string GetName()
         {
             return name;
+        }
+
+        public int GetScore()
+        {
+            return score;
+        }
+
+        public void SetScore(int value)
+        {
+            score += value;
         }
 
         public void ChangeStats(string changeType, string change, int changeValue)
@@ -182,10 +197,17 @@ namespace Arena_Fight
                     else
                         maxHp -= changeValue;
                     break;
-
+                case "Silver":
+                    silver -= changeValue;
+                    break;
                 default:
                     break;
             }
+        }
+
+        internal void HealPlayer()
+        {
+            currentHp = maxHp;
         }
 
         public string GetHighestAtk()

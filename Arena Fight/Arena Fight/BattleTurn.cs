@@ -52,11 +52,11 @@ namespace Arena_Fight
                 if (enemyRoll > player.GetStats("Dexterity"))
                 {
                     player.ChangeStats("currentHp", "-", enemyRoll - player.GetStats("Dexterity"));
-                    battleLog += "\n \n" + enemy.GetName() + monsterHitting[rnd.Next(0, 3)];
+                    battleLog += "\n \n" + enemy.GetName() + monsterHitting[rnd.Next(0, 3)] + "\n" + player.GetName() + " has " + player.GetStats("currentHp") + " health left";
                 }
                 else
                 {
-                    battleLog += "\n \n " + enemy.GetName() + monsterMissing[rnd.Next(0, 3)];
+                    battleLog += "\n \n "  + monsterMissing[rnd.Next(0, 3)] + enemy.GetName();
                 }
             }
 

@@ -8,13 +8,14 @@ namespace Arena_Fight
 {
     class Enemy : Character
     {
+        protected int score = 0;
         protected int currentHp = 0;
         protected int strength = 0;
         protected int dexterity = 0;
         protected int silver = 0;
 
         protected string name;
-        protected string[] nameList = new string[] { "Azog", "Balcmeg", "Boldog", "Bolg", "Golfimbul", "Gorbag", "Gorgol", "Grishnákh", "Lagduf"};
+        protected string[] nameList = new string[] { "Azog", "Balcmeg", "Boldog", "Bolg", "Golfimbul", "Gorbag", "Gorgol", "Grishnákh", "Lagduf" };
 
         public Enemy()
         {
@@ -28,17 +29,23 @@ namespace Arena_Fight
             return name;
         }
 
-        public virtual void Defend()
-        {
-
-        }
-
         public virtual void CheckStats()
         {
             Console.WriteLine("Name: " + name +
                 "\n Health: " + currentHp +
                 "\n Strength: " + strength +
                 "\n Dexterity: " + dexterity);
+        }
+
+        public int GetScore()
+        {
+            return score;
+        }
+
+        protected void SetScore()
+        {
+            score += GetStats(GetHighestAtk());
+            score += currentHp / 2;
         }
 
         public int GetStats(string statCheck)
@@ -60,7 +67,7 @@ namespace Arena_Fight
                     value = silver;
                     break;
             }
-                    return value;
+            return value;
         }
 
         public string GetHighestAtk()

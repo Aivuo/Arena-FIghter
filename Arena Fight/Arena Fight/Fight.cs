@@ -44,6 +44,7 @@ namespace Arena_Fight
                         player.SetSilver(silver);
                         Console.WriteLine(player.GetName() + " gained " + silver + " silver");
                         playerAlive = true;
+                        player.SetScore(enemy.GetScore());
                     }
                     else
                         playerAlive = false;

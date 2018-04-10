@@ -72,7 +72,7 @@ namespace Arena_Fight
 
             string menuChoice = "0";
             //Used to keep check of the stats and to tell GetStats what stats to get.
-            string[] stats = new string[]{"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
+            string[] stats = new string[] { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma", "Current Health", "Silver" };
             Enemy enemy = null;
             Fight fight = null;
 
@@ -82,7 +82,8 @@ namespace Arena_Fight
                 Console.WriteLine("1: Check stats" +
                     "\n 2: Check on your enemy" +
                     "\n 3: Fight your enemy" +
-                    "\n 4: Return to menu");
+                    "\n 4: Heal (10 silver)" +
+                    "\n 5: End " + player.GetName() + "'s run");
                 menuChoice = Console.ReadLine();
 
                 switch (menuChoice)
@@ -112,7 +113,7 @@ namespace Arena_Fight
                             }
                             else
                             {
-                                player = EndTheRun(player);
+                                player = EndTheRun(player, enemy);
                                 return;
                             }
                         }
@@ -123,14 +124,29 @@ namespace Arena_Fight
                         }
                         break;
                     case "4":
+                        Console.Clear();
+                        if (player.GetStats("Silver") >= 10)
+                        {
+                            player.ChangeStats("Silver", "-", 10);
+                            player.HealPlayer();
+                            Console.WriteLine("You are now healed!");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine("You do not have enough silver.");
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "5":
                         //StartMenu(player); //This was stupid of me. Keeping it as a reminder. Don't call the same function in the very same function! Use a loop!
-                        player = EndTheRun(player);
+                        player = EndTheRun(player, enemy);
                         return;
-                } 
+                }
             }
         }
 
-        private static Player EndTheRun(Player player)
+        private static Player EndTheRun(Player player, Enemy enemy)
         {
             Console.Clear();
 
@@ -138,8 +154,11 @@ namespace Arena_Fight
             {
                 Console.WriteLine(log);
             }
+            Console.WriteLine("\n \n" + player.GetName() + "'s score is: " + player.GetScore());
+
             Console.ReadKey();
             player = null;
+            enemy = null;
             return player;
         }
 
@@ -173,7 +192,7 @@ namespace Arena_Fight
                     enemy = null;
                     break;
             }
-
+            Console.WriteLine("You found a foe!");
             return enemy;
         }
     }
