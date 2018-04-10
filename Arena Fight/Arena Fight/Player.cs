@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arena_Fight
 {
-    public class Player
+    class Player : Character
     {
 
         //Just base stats. Aren't sure if all are going to get used but hey.
@@ -14,7 +14,7 @@ namespace Arena_Fight
         int maxHp = 1;
         int currentHp = 1;
 
-        int strenght = 0;
+        int strength = 0;
         int dexterity = 0;
         int constitution = 0;
         int intelligence = 0;
@@ -26,6 +26,9 @@ namespace Arena_Fight
 
         string name;
         string choice;
+
+        List<string> battleLog;
+
 
         public Player()
         {
@@ -47,7 +50,7 @@ namespace Arena_Fight
 
             while (true)
             {
-                strenght = rnd.Next(3, 21);
+                strength = rnd.Next(3, 21);
                 dexterity = rnd.Next(3, 21);
                 constitution = rnd.Next(3, 21);
                 intelligence = rnd.Next(3, 21);
@@ -57,7 +60,7 @@ namespace Arena_Fight
 
                 Console.WriteLine("This is you: " +
                   "\n Your name: " + name +
-                  "\n Strenght: " + strenght +
+                  "\n Strenght: " + strength +
                   "\n Dexterity: " + dexterity +
                   "\n Constitution: " + constitution +
                   "\n Intelligence: " + intelligence +
@@ -93,7 +96,7 @@ namespace Arena_Fight
             switch (statCheck)
             {
                 case "Strenght":
-                    return strenght;
+                    return strength;
                 case "Dexterity":
                     return dexterity;
                 case "Constitution":
@@ -106,6 +109,8 @@ namespace Arena_Fight
                     return charisma;
                 case "Luck":
                     return luck;
+                case "currentHp":
+                    return currentHp;
                 default:
                     return 0;
             }
@@ -114,6 +119,94 @@ namespace Arena_Fight
         public string GetName()
         {
             return name;
+        }
+
+        public void ChangeStats(string changeType, string change, int changeValue)
+        {
+            switch (changeType)
+            {
+                case "Strength":
+                    if (change == "+")
+                        strength += changeValue;
+                    else
+                        strength -= changeValue;
+                    break;
+
+                case "Dexterity":
+                    if (change == "+")
+                        dexterity += changeValue;
+                    else
+                        dexterity -= changeValue;
+                    break;
+
+                case "Constitution":
+                    if (change == "+")
+                        constitution += changeValue;
+                    else
+                        constitution -= changeValue;
+                    break;
+
+                case "Intelligence":
+                    if (change == "+")
+                        intelligence += changeValue;
+                    else
+                        intelligence -= changeValue;
+                    break;
+
+                case "Wisdom":
+                    if (change == "+")
+                        wisdom += changeValue;
+                    else
+                        wisdom -= changeValue;
+                    break;
+
+                case "Charisma":
+                    if (change == "+")
+                        charisma += changeValue;
+                    else
+                        charisma -= changeValue;
+                    break;
+
+                case "currentHp":
+                    if (change == "+")
+                        currentHp += changeValue;
+                    else
+                        currentHp -= changeValue;
+                    break;
+
+                case "maxHp":
+                    if (change == "+")
+                        maxHp += changeValue;
+                    else
+                        maxHp -= changeValue;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        public string GetHighestAtk()
+        {
+            string highest;
+
+            if (strength >= dexterity && strength >= intelligence)
+            {
+                highest = "Strength";
+            }
+            else if (dexterity >= strength && dexterity >= intelligence)
+            {
+                highest = "Dexterity";
+            }
+            else
+                highest = "Intelligence";
+
+            return highest;
+        }
+
+        public void SetBattleLog(List<string> battleLogIn)
+        {
+            battleLog = battleLogIn;
         }
     }
 }

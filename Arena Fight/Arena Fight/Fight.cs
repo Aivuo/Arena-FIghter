@@ -8,5 +8,32 @@ namespace Arena_Fight
 {
     class Fight
     {
+        Player player;
+        Enemy enemy;
+        BattleTurn turn;
+        List<String> battleLog;
+        Random rnd;
+
+        public Fight(Player playerIn, Enemy enemyIn)
+        {
+            player = playerIn;
+            enemy = enemyIn;
+        }
+
+        public void DoBattle()
+        {
+            while (true)
+            {
+                rnd = new Random();
+                turn = new BattleTurn(player, enemy);
+
+                turn.HitEachother(rnd);
+
+                if (player.GetStats("currentHp") <= 0 || enemy.GetStats("currentHp") <= 0)
+                {
+                    player.SetBattleLog(battleLog);
+                }
+            }
+        }
     }
 }

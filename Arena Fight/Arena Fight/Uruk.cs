@@ -12,7 +12,7 @@ namespace Arena_Fight
         {
             Random rnd = new Random();
 
-            health = rnd.Next(10, 18);
+            currentHp = rnd.Next(10, 18);
             strength = rnd.Next(10, 16);
             dexterity = rnd.Next(10, 16);
             silver = rnd.Next(10, 21);

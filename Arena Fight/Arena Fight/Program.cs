@@ -72,6 +72,7 @@ namespace Arena_Fight
             //Used to keep check of the stats and to tell GetStats what stats to get.
             string[] stats = new string[]{"Strenght", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
             Enemy enemy = null;
+            Fight fight = null;
 
             while (true)
             {
@@ -100,7 +101,8 @@ namespace Arena_Fight
                     case "3":
                         if (enemy != null)
                         {
-                            enemy.CheckStats();
+                            fight = new Fight(player, enemy);
+                            fight.DoBattle();
                             Console.ReadKey();
                         }
                         else
