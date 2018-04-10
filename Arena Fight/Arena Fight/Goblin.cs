@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Arena_Fight
 {
+
+
     class Goblin : Enemy
     {
+        public Goblin()
+        {
+            health = 10;
+            strength = 5;
+            dexterity = 12;
+
+        }
+
     }
+
 }

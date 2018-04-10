@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arena_Fight
 {
-    class Orc : Enemy
+    class Fight
     {
-        public Orc()
-        {
-            health = 15;
-            strength = 8;
-            dexterity = 10;
-        }
     }
 }

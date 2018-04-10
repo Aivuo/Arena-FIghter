@@ -8,5 +8,11 @@ namespace Arena_Fight
 {
     class Uruk : Enemy
     {
+        public Uruk()
+        {
+            health = 20;
+            strength = 15;
+            dexterity = 5;
+        }
     }
 }

@@ -71,12 +71,15 @@ namespace Arena_Fight
             string menuChoice = "0";
             //Used to keep check of the stats and to tell GetStats what stats to get.
             string[] stats = new string[]{"Strenght", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"};
+            Enemy enemy = null;
 
             while (true)
             {
                 Console.Clear();
                 Console.WriteLine("1: Check stats" +
-                    "\n 2: Return to menu");
+                    "\n 2: Check on your enemy" +
+                    "\n 3: Fight your enemy" +
+                    "\n 4: Return to menu");
                 menuChoice = Console.ReadLine();
 
                 switch (menuChoice)
@@ -91,10 +94,60 @@ namespace Arena_Fight
                         Console.ReadKey();
                         break;
                     case "2":
+                        enemy = ChooseOpponent();
+                        Console.ReadKey();
+                        break;
+                    case "3":
+                        if (enemy != null)
+                        {
+                            enemy.CheckStats();
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have not found an opponent yet");
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "4":
                         //StartMenu(player); //This was stupid of me. Keeping it as a reminder. Don't call the same function in the very same function! Use a loop!
                         return;
                 } 
             }
+        }
+
+        private static Enemy ChooseOpponent()
+        {
+            string menuChoice;
+            Enemy enemy = null;
+
+
+            Console.WriteLine("You are searching for an opponent in the wilderness " +
+                "\n Do you want to search for a: " +
+                "\n 1: Goblin" +
+                "\n 2: Orc" +
+                "\n 3: Uruk" +
+                "\n 4: Or do you back away from your hunt?");
+
+            menuChoice = Console.ReadLine();
+
+            switch (menuChoice)
+            {
+                case "1":
+                    enemy = new Goblin();
+                    break;
+                case "2":
+                    enemy = new Orc();
+                    break;
+                case "3":
+                    enemy = new Uruk();
+                    break;
+                case "4":
+                    enemy = null;
+                    break;
+            }
+
+            return enemy;
         }
     }
 }
