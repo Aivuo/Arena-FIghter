@@ -10,9 +10,12 @@ namespace Arena_Fight
     {
         public Uruk()
         {
-            health = 20;
-            strength = 15;
-            dexterity = 5;
+            Random rnd = new Random();
+
+            health = rnd.Next(10, 18);
+            strength = rnd.Next(10, 16);
+            dexterity = rnd.Next(10, 16);
+            silver = rnd.Next(10, 21);
         }
     }
 }

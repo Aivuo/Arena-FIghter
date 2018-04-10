@@ -10,9 +10,12 @@ namespace Arena_Fight
     {
         public Orc()
         {
-            health = 15;
-            strength = 8;
-            dexterity = 10;
+            Random rnd = new Random();
+
+            health = rnd.Next(8, 15);
+            strength = rnd.Next(5, 10);
+            dexterity = rnd.Next(5, 10);
+            silver = rnd.Next(5, 16);
         }
     }
 }
