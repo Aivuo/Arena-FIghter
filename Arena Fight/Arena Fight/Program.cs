@@ -80,21 +80,18 @@ namespace Arena_Fight
             {
                 Console.Clear();
                 Console.WriteLine("1: Check stats" +
-                    "\n 2: Check on your enemy" +
-                    "\n 3: Fight your enemy" +
-                    "\n 4: Heal (10 silver)" +
-                    "\n 5: End " + player.GetName() + "'s run");
+                    "\n 2: Look for an enemy" +
+                    "\n 3: Study your enemy" +
+                    "\n 4: Fight your enemy" +
+                    "\n 5: Heal (10 silver)" +
+                    "\n 6: End " + player.GetName() + "'s run");
                 menuChoice = Console.ReadLine();
 
                 switch (menuChoice)
                 {
                     case "1":
                         Console.Clear();
-                        Console.WriteLine(player.GetName());
-                        foreach (var stat in stats)
-                        {
-                            Console.WriteLine(stat + ": " + player.GetStats(stat));
-                        }
+                        player.PrintStats();
                         Console.ReadKey();
                         break;
                     case "2":
@@ -102,6 +99,13 @@ namespace Arena_Fight
                         Console.ReadKey();
                         break;
                     case "3":
+                        if(enemy != null)
+                            enemy.CheckStats();
+                        else
+                            Console.WriteLine("You have not found an opponent yet");
+                        Console.ReadKey();
+                        break;
+                    case "4":
                         if (enemy != null)
                         {
                             fight = new Fight(player, enemy);
@@ -123,7 +127,7 @@ namespace Arena_Fight
                             Console.ReadKey();
                         }
                         break;
-                    case "4":
+                    case "5":
                         Console.Clear();
                         if (player.GetStats("Silver") >= 10)
                         {
@@ -138,7 +142,7 @@ namespace Arena_Fight
                             Console.ReadKey();
                         }
                         break;
-                    case "5":
+                    case "6":
                         //StartMenu(player); //This was stupid of me. Keeping it as a reminder. Don't call the same function in the very same function! Use a loop!
                         player = EndTheRun(player, enemy);
                         return;

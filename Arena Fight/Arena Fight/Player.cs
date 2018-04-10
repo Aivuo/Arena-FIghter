@@ -28,6 +28,11 @@ namespace Arena_Fight
 
         string name;
         string choice;
+        string knight = "   _ \n" +
+            "  |-| \n" +
+            " < T > \n" +
+            "  | | \n";
+
 
         List<string> battleLog;
 
@@ -62,16 +67,12 @@ namespace Arena_Fight
                 charisma = rnd.Next(3, 21);
                 luck = rnd.Next(3, 21);
 
-                Console.WriteLine("This is you: " +
-                  "\n Your name: " + name +
-                  "\n Strenght: " + strength +
-                  "\n Dexterity: " + dexterity +
-                  "\n Constitution: " + constitution +
-                  "\n Intelligence: " + intelligence +
-                  "\n Wisdom: " + wisdom +
-                  "\n Charisma: " + charisma +
-                  "\n Are you happy with theese stats? y/n"
-                  );
+                SetStats();
+
+                Console.WriteLine("This is you: ");
+                PrintStats();
+                Console.WriteLine("\n Are you happy with theese stats? y/n"); 
+                  
                 choice = Console.ReadLine();
 
                 if (choice == "n" || choice == "N")
@@ -81,7 +82,6 @@ namespace Arena_Fight
                 }
                 else
                 {
-                    SetStats();
                     return;
                 } 
             }
@@ -121,6 +121,21 @@ namespace Arena_Fight
                 default:
                     return 0;
             }
+        }
+
+        internal void PrintStats()
+        {
+            Console.WriteLine(knight +
+                "\n " + name +
+                "\n Strength: " + strength +
+                "\n Dexterity: " + dexterity +
+                "\n Constitution: " + constitution +
+                "\n Intelligence: " + intelligence +
+                "\n Wisdom: " + wisdom +
+                "\n Charisma: " + charisma +
+                "\n \n Current Health: " + currentHp +
+                "\n Maximum Health: " + maxHp +
+                "\n \n Current Silver: " + silver);
         }
 
         public string GetName()

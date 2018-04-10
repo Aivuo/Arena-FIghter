@@ -40,7 +40,9 @@ namespace Arena_Fight
             {
                 damage = playerRoll - enemy.GetStats("Dexterity");
                 enemy.SetHealth(damage);
-                battleLog = player.GetName() + hittingMonster[rnd.Next(0, 3)]+ "\n" + damage + " Damage done! \n" + enemy.GetName() + " has " + enemy.GetStats("currentHp") + " health left";
+                battleLog = player.GetName() + hittingMonster[rnd.Next(0, 3)] + 
+                    "\n" + damage + " Damage done! " +
+                    "\n" + enemy.GetName() + " has " + enemy.GetStats("currentHp") + " health left";
             }
             else
             {
@@ -51,8 +53,9 @@ namespace Arena_Fight
             {
                 if (enemyRoll > player.GetStats("Dexterity"))
                 {
-                    player.ChangeStats("currentHp", "-", enemyRoll - player.GetStats("Dexterity"));
-                    battleLog += "\n \n" + enemy.GetName() + monsterHitting[rnd.Next(0, 3)] + "\n" + player.GetName() + " has " + player.GetStats("currentHp") + " health left";
+                    damage = enemyRoll - player.GetStats("Dexterity");
+                    player.ChangeStats("currentHp", "-", damage);
+                    battleLog += "\n \n" + enemy.GetName() + monsterHitting[rnd.Next(0, 3)] + "\n" + damage + " Damage done!" + "\n" + player.GetName() + " has " + player.GetStats("currentHp") + " health left";
                 }
                 else
                 {
