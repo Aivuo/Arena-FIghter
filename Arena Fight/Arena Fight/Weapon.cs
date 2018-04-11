@@ -73,7 +73,7 @@ namespace Arena_Fight
 
         }
 
-        public string PrintStats()
+        public void PrintStats()
         {
             Console.WriteLine(printedWeapon);
         }
