@@ -9,6 +9,8 @@ namespace Arena_Fight
     class Player : Character
     {
 
+        Weapon weapon = null;
+
         //Just base stats. Aren't sure if all are going to get used but hey.
         int level = 5;
         int maxHp = 1;
@@ -20,6 +22,7 @@ namespace Arena_Fight
         int intelligence = 0;
         int wisdom = 0;
         int charisma = 0;
+
         int silver = 0;
         int score = 0;
 
@@ -28,7 +31,7 @@ namespace Arena_Fight
 
         string name;
         string choice;
-        string knight = "   _ \n" +
+        string characterPortrait = "   _ \n" +
             "  |-| \n" +
             " < T > \n" +
             "  | | \n";
@@ -71,8 +74,8 @@ namespace Arena_Fight
 
                 Console.WriteLine("This is you: ");
                 PrintStats();
-                Console.WriteLine("\n Are you happy with theese stats? y/n"); 
-                  
+                Console.WriteLine("\n Are you happy with theese stats? y/n");
+
                 choice = Console.ReadLine();
 
                 if (choice == "n" || choice == "N")
@@ -83,7 +86,7 @@ namespace Arena_Fight
                 else
                 {
                     return;
-                } 
+                }
             }
         }
 
@@ -97,45 +100,82 @@ namespace Arena_Fight
         //Checks an incoming string to see what value it should send back
         public int GetStats(string statCheck)
         {
-            switch (statCheck)
+            if (weapon != null)
             {
-                case "Strenght":
-                    return strength;
-                case "Dexterity":
-                    return dexterity;
-                case "Constitution":
-                    return constitution;
-                case "Intelligence":
-                    return intelligence;
-                case "Wisdom":
-                    return wisdom;
-                case "Charisma":
-                    return charisma;
-                case "Luck":
-                    return luck;
-                case "Current Health":
-                case "currentHp":
-                    return currentHp;
-                case "Silver":
-                    return silver;
-                default:
-                    return 0;
+                switch (statCheck)
+                {
+                    case "Strength":
+                        return strength + weapon.GetPower();
+                    case "Dexterity":
+                        return dexterity + weapon.GetPower();
+                    case "Constitution":
+                        return constitution;
+                    case "Intelligence":
+                        return intelligence + weapon.GetPower();
+                    case "Wisdom":
+                        return wisdom;
+                    case "Charisma":
+                        return charisma;
+                    case "Luck":
+                        return luck;
+                    case "Current Health":
+                    case "currentHp":
+                        return currentHp;
+                    case "Silver":
+                        return silver;
+                    default:
+                        return 0;
+                }
+            }
+            else
+            {
+                switch (statCheck)
+                {
+                    case "Strength":
+                        return strength;
+                    case "Dexterity":
+                        return dexterity;
+                    case "Constitution":
+                        return constitution;
+                    case "Intelligence":
+                        return intelligence;
+                    case "Wisdom":
+                        return wisdom;
+                    case "Charisma":
+                        return charisma;
+                    case "Luck":
+                        return luck;
+                    case "Current Health":
+                    case "currentHp":
+                        return currentHp;
+                    case "Silver":
+                        return silver;
+                    default:
+                        return 0;
+                }
             }
         }
 
         internal void PrintStats()
         {
-            Console.WriteLine(knight +
+            Console.WriteLine(
+                characterPortrait +
                 "\n " + name +
-                "\n Strength: " + strength +
-                "\n Dexterity: " + dexterity +
-                "\n Constitution: " + constitution +
-                "\n Intelligence: " + intelligence +
-                "\n Wisdom: " + wisdom +
-                "\n Charisma: " + charisma +
+                "\n Strength: " + GetStats("Strength") +
+                "\n Dexterity: " + GetStats("dexterity") +
+                "\n Constitution: " + GetStats("constitution") +
+                "\n Intelligence: " + GetStats("intelligence") +
+                "\n Wisdom: " + GetStats("wisdom") +
+                "\n Charisma: " + GetStats("charisma") +
                 "\n \n Current Health: " + currentHp +
                 "\n Maximum Health: " + maxHp +
                 "\n \n Current Silver: " + silver);
+
+            if (weapon != null)
+            {
+                Console.WriteLine("\n \n");
+                weapon.PrintStats();
+            }
         }
 
         public string GetName()
@@ -151,6 +191,11 @@ namespace Arena_Fight
         public void SetScore(int value)
         {
             score += value;
+        }
+
+        public void SetWeapon(Weapon weaponIn)
+        {
+            weapon = weaponIn;
         }
 
         public void ChangeStats(string changeType, string change, int changeValue)

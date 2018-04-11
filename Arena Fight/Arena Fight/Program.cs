@@ -75,6 +75,7 @@ namespace Arena_Fight
             string[] stats = new string[] { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma", "Current Health", "Silver" };
             Enemy enemy = null;
             Fight fight = null;
+            Shop shop = null;
 
             while (true)
             {
@@ -83,10 +84,12 @@ namespace Arena_Fight
                     "\n 2: Look for an enemy" +
                     "\n 3: Study your enemy" +
                     "\n 4: Fight your enemy" +
-                    "\n 5: Heal (10 silver)" +
+                    "\n 5: Shop" +
+                    //"\n 6: Heal (10 silver)" +
                     "\n 6: End " + player.GetName() + "'s run");
                 menuChoice = Console.ReadLine();
 
+                //Second menu after you have generated your character
                 switch (menuChoice)
                 {
                     case "1":
@@ -129,19 +132,28 @@ namespace Arena_Fight
                         break;
                     case "5":
                         Console.Clear();
-                        if (player.GetStats("Silver") >= 10)
-                        {
-                            player.ChangeStats("Silver", "-", 10);
-                            player.HealPlayer();
-                            Console.WriteLine("You are now healed!");
-                            Console.ReadKey();
-                        }
-                        else
-                        {
-                            Console.WriteLine("You do not have enough silver.");
-                            Console.ReadKey();
-                        }
+                        shop = new Shop(player);
+                        shop.PrintShop();
+                        menuChoice = Console.ReadLine();
+                        shop.BuyWeapon(menuChoice);
+                        Console.ReadKey();
+
                         break;
+                    //case "6":
+                    //    Console.Clear();
+                    //    if (player.GetStats("Silver") >= 10)
+                    //    {
+                    //        player.ChangeStats("Silver", "-", 10);
+                    //        player.HealPlayer();
+                    //        Console.WriteLine("You are now healed!");
+                    //        Console.ReadKey();
+                    //    }
+                    //    else
+                    //    {
+                    //        Console.WriteLine("You do not have enough silver.");
+                    //        Console.ReadKey();
+                    //    }
+                    //    break;
                     case "6":
                         //StartMenu(player); //This was stupid of me. Keeping it as a reminder. Don't call the same function in the very same function! Use a loop!
                         player = EndTheRun(player, enemy);
@@ -172,7 +184,8 @@ namespace Arena_Fight
             Enemy enemy = null;
 
 
-            Console.WriteLine("You are searching for an opponent in the wilderness " +
+            Console.WriteLine(
+                " You are searching for an opponent in the wilderness " +
                 "\n Do you want to search for a: " +
                 "\n 1: Goblin" +
                 "\n 2: Orc" +

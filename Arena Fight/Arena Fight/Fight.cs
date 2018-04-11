@@ -25,10 +25,10 @@ namespace Arena_Fight
         public bool DoBattle()
         {
             battleLog = new List<string>();
+            rnd = new Random();
 
             while (true)
             {
-                rnd = new Random();
                 turn = new BattleTurn(player, enemy);
                 bool playerAlive = true;
 
