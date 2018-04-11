@@ -10,12 +10,14 @@ namespace Arena_Fight
     {
         string weaponName;
         string weaponClass;
+        string printedWeapon;
         int weaponValue = 0;
         int weaponPower = 0;
 
         public Weapon(Random rnd, string name, string type)
         {
             weaponName = name;
+
 
             switch (type)
             {
@@ -65,15 +67,20 @@ namespace Arena_Fight
                     break;
             }
 
+            printedWeapon = weaponName + "\n" +
+                            "It is a " + weaponClass + " based weapon" + "\n" +
+                            "It costs " + weaponValue + " silver";
+
         }
 
-        public void PrintStats()
+        public string PrintStats()
         {
-            Console.WriteLine(
-                "\n" +
-                "This is a " + weaponName + "\n" +
-                "It is a " + weaponClass + " based weapon" + "\n" +
-                "It costs " + weaponValue + " silver");
+            Console.WriteLine(printedWeapon);
+        }
+
+        public string GetPrintedStats()
+        {
+            return printedWeapon;
         }
 
         internal int GetValue()
@@ -84,6 +91,11 @@ namespace Arena_Fight
         public int GetPower()
         {
             return weaponPower;
+        }
+
+        public string GetWeaponClass()
+        {
+            return weaponClass;
         }
 
         internal string GetName()

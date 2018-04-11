@@ -45,13 +45,13 @@ namespace Arena_Fight
             SetName();
             RollStats();
             battleLog = new List<string>();
-            battleLog.Add("\nThis is the story of " + name + "\n \n");
+            battleLog.Add("\n This is the story of " + name + "\n \n");
         }
 
         private void SetName()
         {
             Console.Clear();
-            Console.WriteLine("Please write your characters name: ");
+            Console.WriteLine(" Please write your characters name: ");
             name = Console.ReadLine();
         }
 
@@ -100,31 +100,52 @@ namespace Arena_Fight
         //Checks an incoming string to see what value it should send back
         public int GetStats(string statCheck)
         {
+            int value = 0;
+
             if (weapon != null)
             {
                 switch (statCheck)
                 {
                     case "Strength":
-                        return strength + weapon.GetPower();
+                        if (weapon.GetWeaponClass() == "Strength")
+                        {
+                            value = strength + weapon.GetPower(); 
+                        }
+                        break;
                     case "Dexterity":
-                        return dexterity + weapon.GetPower();
+                        if (weapon.GetWeaponClass() == "Dexterity")
+                        {
+                            value = dexterity + weapon.GetPower();
+                        }
+                        break;
                     case "Constitution":
-                        return constitution;
+                        value = constitution;
+                        break;
                     case "Intelligence":
-                        return intelligence + weapon.GetPower();
+                        if (weapon.GetWeaponClass() == "Intelligence")
+                        {
+                            value = intelligence + weapon.GetPower();
+                        }
+                        break;
                     case "Wisdom":
-                        return wisdom;
+                        value = wisdom;
+                        break;
                     case "Charisma":
-                        return charisma;
+                        value = charisma;
+                        break;
                     case "Luck":
-                        return luck;
+                        value = luck;
+                        break;
                     case "Current Health":
                     case "currentHp":
-                        return currentHp;
+                        value = currentHp;
+                        break;
                     case "Silver":
-                        return silver;
+                        value = silver;
+                        break;
                     default:
-                        return 0;
+                        value = 0;
+                        break;
                 }
             }
             else
@@ -132,28 +153,40 @@ namespace Arena_Fight
                 switch (statCheck)
                 {
                     case "Strength":
-                        return strength;
+                        value = strength;
+                        break;
                     case "Dexterity":
-                        return dexterity;
+                        value = dexterity;
+                        break;
                     case "Constitution":
-                        return constitution;
+                        value = constitution;
+                        break;
                     case "Intelligence":
-                        return intelligence;
+                        value = intelligence;
+                        break;
                     case "Wisdom":
-                        return wisdom;
+                        value = wisdom;
+                        break;
                     case "Charisma":
-                        return charisma;
+                        value = charisma;
+                        break;
                     case "Luck":
-                        return luck;
+                        value = luck;
+                        break;
                     case "Current Health":
                     case "currentHp":
-                        return currentHp;
+                        value = currentHp;
+                        break;
                     case "Silver":
-                        return silver;
+                        value = silver;
+                        break;
                     default:
-                        return 0;
+                        value = 0;
+                        break;
                 }
             }
+
+            return value;
         }
 
         internal void PrintStats()
@@ -162,11 +195,11 @@ namespace Arena_Fight
                 characterPortrait +
                 "\n " + name +
                 "\n Strength: " + GetStats("Strength") +
-                "\n Dexterity: " + GetStats("dexterity") +
-                "\n Constitution: " + GetStats("constitution") +
-                "\n Intelligence: " + GetStats("intelligence") +
-                "\n Wisdom: " + GetStats("wisdom") +
-                "\n Charisma: " + GetStats("charisma") +
+                "\n Dexterity: " + GetStats("Dexterity") +
+                "\n Constitution: " + GetStats("Constitution") +
+                "\n Intelligence: " + GetStats("Intelligence") +
+                "\n Wisdom: " + GetStats("Wisdom") +
+                "\n Charisma: " + GetStats("Charisma") +
                 "\n \n Current Health: " + currentHp +
                 "\n Maximum Health: " + maxHp +
                 "\n \n Current Silver: " + silver);
@@ -196,6 +229,7 @@ namespace Arena_Fight
         public void SetWeapon(Weapon weaponIn)
         {
             weapon = weaponIn;
+            battleLog.Add("\n" + weapon.GetPrintedStats());
         }
 
         public void ChangeStats(string changeType, string change, int changeValue)

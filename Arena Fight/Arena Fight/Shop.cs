@@ -52,15 +52,17 @@ namespace Arena_Fight
 
         public void PrintShop()
         {
+            int i = 1;
             Console.WriteLine(
                 " Welcome to the shop" +
                 "\n What can I interest you with today?" +
-                "\n You currently have: " + player.GetStats("Silver") + " Silver");
+                "\n You currently have: " + player.GetStats("Silver") + " Silver \n");
 
             foreach (var weapon in weapons)
             {
-                //Console.WriteLine("\n" + weapon + ":");
+                Console.Write("\n" + i + ": This is a ");
                 weapon.PrintStats();
+                i++;
             }
             Console.WriteLine(
                 "\n 5: Heal (10 Silver)" +

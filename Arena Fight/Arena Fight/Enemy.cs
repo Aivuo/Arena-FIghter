@@ -89,6 +89,10 @@ namespace Arena_Fight
         public void SetHealth(int value)
         {
             currentHp -= value;
+            if (value < 0)
+            {
+                value = 0;
+            }
         }
     }
 
